@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/52a78825cdfc2cfc87000005
+
 s = " 2 + 3 / 4 * 5 * ( ( ( 6 ) ) ) + 1 + ( ( -12 ) ) "
 # s = "  -( -2 )  + -3 /  -( -4 * -5 )  *  -(1 + (  -( -6 )  )  )  + -1 - 12"
 # s = "-1-1-1-1-1"
@@ -178,141 +180,141 @@ print(func(s))
 
 
 
-def calc(s):
-    print(s)
-    def simplify(s):
-        s = "".join(char for char in s if char != " ")
+# def calc(s):
+#     print(s)
+#     def simplify(s):
+#         s = "".join(char for char in s if char != " ")
 
-        while "--" in s:
-            for i in range(len(s)):
-                if s[i:i+2] == "--":
-                    s = s[:i] + "+" + s[i+2:]
+#         while "--" in s:
+#             for i in range(len(s)):
+#                 if s[i:i+2] == "--":
+#                     s = s[:i] + "+" + s[i+2:]
 
-        while "+-" in s:
-            for i in range(len(s)):
-                if s[i:i+2] == "+-":
-                    s = s[:i] + "-" + s[i+2:]
+#         while "+-" in s:
+#             for i in range(len(s)):
+#                 if s[i:i+2] == "+-":
+#                     s = s[:i] + "-" + s[i+2:]
 
-        while "-+" in s:
-            for i in range(len(s)):
-                if s[i:i+2] == "-+":
-                    s = s[:i] + "-" + s[i+2:]
+#         while "-+" in s:
+#             for i in range(len(s)):
+#                 if s[i:i+2] == "-+":
+#                     s = s[:i] + "-" + s[i+2:]
         
-        while "++" in s:
-            for i in range(len(s)):
-                if s[i:i+2] == "++":
-                    s = s[:i] + "+" + s[i+2:]
+#         while "++" in s:
+#             for i in range(len(s)):
+#                 if s[i:i+2] == "++":
+#                     s = s[:i] + "+" + s[i+2:]
 
-        ops = ["+", "-", "*", "/", "(", ")"]
+#         ops = ["+", "-", "*", "/", "(", ")"]
 
-        s = list(s)
+#         s = list(s)
 
-        for i in range(len(s)):
-            if s[i] in ops:
-                s[i] = " " + s[i] + " "
+#         for i in range(len(s)):
+#             if s[i] in ops:
+#                 s[i] = " " + s[i] + " "
 
-        s = "".join(s)
-        s = s.split()
+#         s = "".join(s)
+#         s = s.split()
         
-        if s[0] == "-" and s[1] != "(":
-            s = [str(-float(s[1]))] + s[2:]
+#         if s[0] == "-" and s[1] != "(":
+#             s = [str(-float(s[1]))] + s[2:]
         
-        return s
+#         return s
 
-    def multiply(s):
-        if s[s.index('*')+1] == "-":
-            s = s[:(s.index('*') - 1)] + [str(float(s[s.index('*') - 1]) * -float(s[s.index('*') + 2]))] + s[(s.index('*') + 3):]
-        elif s[s.index('*')+1] == "+":
-            s = s[:(s.index('*') - 1)] + [str(float(s[s.index('*') - 1]) * float(s[s.index('*') + 2]))] + s[(s.index('*') + 3):]
-        else:
-            s = s[:(s.index('*') - 1)] + [str(float(s[s.index('*') - 1]) * float(s[s.index('*') + 1]))] + s[(s.index('*') + 2):]
-        return s
+#     def multiply(s):
+#         if s[s.index('*')+1] == "-":
+#             s = s[:(s.index('*') - 1)] + [str(float(s[s.index('*') - 1]) * -float(s[s.index('*') + 2]))] + s[(s.index('*') + 3):]
+#         elif s[s.index('*')+1] == "+":
+#             s = s[:(s.index('*') - 1)] + [str(float(s[s.index('*') - 1]) * float(s[s.index('*') + 2]))] + s[(s.index('*') + 3):]
+#         else:
+#             s = s[:(s.index('*') - 1)] + [str(float(s[s.index('*') - 1]) * float(s[s.index('*') + 1]))] + s[(s.index('*') + 2):]
+#         return s
 
-    def divide(s):
-        if s[s.index('/')+1] == "-":
-            s = s[:(s.index('/') - 1)] + [str(float(s[s.index('/') - 1]) / -float(s[s.index('/') + 2]))] + s[(s.index('/') + 3):]
-        elif s[s.index('/')+1] == "+":
-            s = s[:(s.index('/') - 1)] + [str(float(s[s.index('/') - 1]) / float(s[s.index('/') + 2]))] + s[(s.index('/') + 3):]
-        else: 
-            s = s[:(s.index('/') - 1)] + [str(float(s[s.index('/') - 1]) / float(s[s.index('/') + 1]))] + s[(s.index('/') + 2):]
-        return s
+#     def divide(s):
+#         if s[s.index('/')+1] == "-":
+#             s = s[:(s.index('/') - 1)] + [str(float(s[s.index('/') - 1]) / -float(s[s.index('/') + 2]))] + s[(s.index('/') + 3):]
+#         elif s[s.index('/')+1] == "+":
+#             s = s[:(s.index('/') - 1)] + [str(float(s[s.index('/') - 1]) / float(s[s.index('/') + 2]))] + s[(s.index('/') + 3):]
+#         else: 
+#             s = s[:(s.index('/') - 1)] + [str(float(s[s.index('/') - 1]) / float(s[s.index('/') + 1]))] + s[(s.index('/') + 2):]
+#         return s
 
-    def mul_div(s):
-        while '*' in s or '/' in s:
-            if '*' in s and '/' in s:
-                if s.index('*') < s.index('/'):
-                    s = multiply(s)
-                else:
-                    s = divide(s)
-            elif '*' in s:
-                s = multiply(s)
-            else:
-                s = divide(s)
-        s = simplify(s)
-        return s
+#     def mul_div(s):
+#         while '*' in s or '/' in s:
+#             if '*' in s and '/' in s:
+#                 if s.index('*') < s.index('/'):
+#                     s = multiply(s)
+#                 else:
+#                     s = divide(s)
+#             elif '*' in s:
+#                 s = multiply(s)
+#             else:
+#                 s = divide(s)
+#         s = simplify(s)
+#         return s
     
-    def sub(s, c="-"):
-        while c in s:
-            s = s[:(s.index(c) - 1)] + [str(float(s[s.index(c) - 1]) - float(s[s.index(c) + 1]))] + s[(s.index(c) + 2):]
-        return s
+#     def sub(s, c="-"):
+#         while c in s:
+#             s = s[:(s.index(c) - 1)] + [str(float(s[s.index(c) - 1]) - float(s[s.index(c) + 1]))] + s[(s.index(c) + 2):]
+#         return s
     
-    def add(s, c="+"):
-        while c in s:
-            if s.index(c) == 0:
-                s = s[1:]
-            else:
-                s = s[:(s.index(c) - 1)] + [str(float(s[s.index(c) - 1]) + float(s[s.index(c) + 1]))] + s[(s.index(c) + 2):]
-        return s
+#     def add(s, c="+"):
+#         while c in s:
+#             if s.index(c) == 0:
+#                 s = s[1:]
+#             else:
+#                 s = s[:(s.index(c) - 1)] + [str(float(s[s.index(c) - 1]) + float(s[s.index(c) + 1]))] + s[(s.index(c) + 2):]
+#         return s
 
-    def compute(s):
-        s = simplify(s)
-        if "*" in s or "/" in s:
-            s = mul_div(s)
-#             print(f'after mul {s}')
-        if "-" in s:
-            s = sub(s)
-#             print(f'after sub{s}')
-        if "+" in s:
-            s = add(s)
-#             print(f'after add{s}')
-        return s
+#     def compute(s):
+#         s = simplify(s)
+#         if "*" in s or "/" in s:
+#             s = mul_div(s)
+# #             print(f'after mul {s}')
+#         if "-" in s:
+#             s = sub(s)
+# #             print(f'after sub{s}')
+#         if "+" in s:
+#             s = add(s)
+# #             print(f'after add{s}')
+#         return s
 
     
-    def find_parens(s):
-        left, right = 0, 0
-        for j in range(len(s)):
-            if s[j] == ")":
-                right = j
-                for i in range(j, -1, -1):
-                    if s[i] == "(":
-                        left = i       
-                        return left, right   
+#     def find_parens(s):
+#         left, right = 0, 0
+#         for j in range(len(s)):
+#             if s[j] == ")":
+#                 right = j
+#                 for i in range(j, -1, -1):
+#                     if s[i] == "(":
+#                         left = i       
+#                         return left, right   
 
-    def compute_parens(s):
-        s = simplify(s)
-        while ")" in s:
-            s = simplify(s)
-#             print(f'simplified: {s}')
-            left, right = find_parens(s)
+#     def compute_parens(s):
+#         s = simplify(s)
+#         while ")" in s:
+#             s = simplify(s)
+# #             print(f'simplified: {s}')
+#             left, right = find_parens(s)
             
-            t = s[(left+1):right]
-            if len(t) == 2:
-                t = ["".join(t)]
-                s = s[:left] + t + s[(right+1):]
-#                 print(f'evaluated parentheses: {s}')
-            else:
-                t = compute(t)
-                s = s[:left] + t + s[(right+1):]
-#                 print(f'evaluated parentheses: {s}')
-        return s
+#             t = s[(left+1):right]
+#             if len(t) == 2:
+#                 t = ["".join(t)]
+#                 s = s[:left] + t + s[(right+1):]
+# #                 print(f'evaluated parentheses: {s}')
+#             else:
+#                 t = compute(t)
+#                 s = s[:left] + t + s[(right+1):]
+# #                 print(f'evaluated parentheses: {s}')
+#         return s
 
-    s = s.split() 
+#     s = s.split() 
 
-    s = compute_parens(s)
+#     s = compute_parens(s)
 
-    s = compute(s)
+#     s = compute(s)
 
-    return float(s[0])
+#     return float(s[0])
 
 
 

@@ -1,76 +1,26 @@
+# https://www.codewars.com/kata/53e57dada0cb0400ba000688
+
+#  FINAL ANSWER!!!!!!!!!!!
+
 from math import factorial as f
 from functools import reduce
-
-# question
-# [einoqstu]
-# pos = 4*f(7) + 6*f(6) + 0*f(5) + 3*f(4) + 3*f(3) + 0*f(2) + 1*f(1) + 1
-# print(pos)
-
-# 4! / 4 + 4! / 2
-# 3 * 4! / 4
-# BEKKOO
-# BEKOKO
-# BEKOOK
-# BEOKKO
-# BEOKOK
-# BEOOKK
-# BKEKOO
-# BKEOKO
-# BKEOOK
-# BKKEOO
-# BKKOEO
-# BKKOOE
-# BKOEKO
-# BKOEOK
-# BKOKEO
-# BKOKOE
-# BKOOEK
-# BKOOKE
-# BOEKKO
-# BOEKOK
-# BOEOKK
-# BOKEKO
-# BOKEOK
-# BOKKEO
-# BOKKOE
-# BOKOEK
-# BOKOKE
-# BOOEKK
-# BOOKEK
-# BOOKKE
-
-
 
 word = "IMMUNOELECTROPHORETICALLY"
 
 def unique(word):
     return sorted(list(set(word)))
 
-def non_unique_comb(word):
-    if _print == True:
-        print("finding non_unique_comb")
+def repeated_let_combs(word):
     non_unique_factorials = [f(word.count(unique(word)[i])) for i in range(len(unique(word))) if word.count(unique(word)[i]) > 1]
-    
-    if _print == True:
-        print(f"word: {word}")
-        print(f"non_unique_factorials: {non_unique_factorials}")
     return non_unique_factorials if non_unique_factorials else [1]
 
-def non_unique_combs(word):
-    if _print == True:
-        print("finding non_unique_combs")
-    output = list(non_unique_comb(word[:word.index(unique(word)[i])] + word[word.index(unique(word)[i])+1:]) for i in range(0,unique(word).index(word[0])))
-    if _print == True:
-        print(f"word: {word}")
-        print(f"non_unique_combs: {output if output != 0 else 1}")
-    return output 
+def all_repeated_let_combs(word):
+    return list(repeated_let_combs(word[:word.index(unique(word)[i])] + word[word.index(unique(word)[i])+1:]) for i in range(0,unique(word).index(word[0])))
 
 def combs(word, i):
     combinations = 0
-    print(f"non_unique_combs: {non_unique_combs(word[i:])}")
-    for factorials in non_unique_combs(word[i:]):
+    for factorials in all_repeated_let_combs(word[i:]):
         factors = list(range(1, len(word) - i))
-        print(f"factorials = {factorials}")
         for k in range(len(factors)):
             if set(factorials) == {float("inf")}:
                 break  
@@ -78,22 +28,69 @@ def combs(word, i):
                 if factors[k] % factorials[j] == 0:
                     factors[k] = int(factors[k] / factorials[j])
                     factorials[j] = float("inf")
-        print(f"factors = {factors}")
-        print(f"factorials = {factorials}")
-        factors = [int(n) for n in factors]
-        print(f"combination = {int(reduce((lambda a,b: a * b), factors))}")
         combinations += int(reduce((lambda a,b: a * b), factors))
-    print(f"combinations: {combinations}")
     return combinations
+
+print(sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:])[0]) + 1)
+
+
+
+# FINAL ANSWER WITH PRINT STATEMENTS FOR ANALYSIS
+
+# def unique(word):
+#     return sorted(list(set(word)))
+
+# def non_unique_comb(word):
+#     if _print == True:
+#         print("finding non_unique_comb")
+#     non_unique_factorials = [f(word.count(unique(word)[i])) for i in range(len(unique(word))) if word.count(unique(word)[i]) > 1]
+    
+#     if _print == True:
+#         print(f"word: {word}")
+#         print(f"non_unique_factorials: {non_unique_factorials}")
+#     return non_unique_factorials if non_unique_factorials else [1]
+
+# def non_unique_combs(word):
+#     if _print == True:
+#         print("finding non_unique_combs")
+#     output = list(non_unique_comb(word[:word.index(unique(word)[i])] + word[word.index(unique(word)[i])+1:]) for i in range(0,unique(word).index(word[0])))
+#     if _print == True:
+#         print(f"word: {word}")
+#         print(f"non_unique_combs: {output if output != 0 else 1}")
+#     return output 
+
+# def combs(word, i):
+#     combinations = 0
+#     print(f"non_unique_combs: {non_unique_combs(word[i:])}")
+#     for factorials in non_unique_combs(word[i:]):
+#         factors = list(range(1, len(word) - i))
+#         print(f"factorials = {factorials}")
+#         for k in range(len(factors)):
+#             if set(factorials) == {float("inf")}:
+#                 break  
+#             for j in range(len(factorials)): 
+#                 if factors[k] % factorials[j] == 0:
+#                     factors[k] = int(factors[k] / factorials[j])
+#                     factorials[j] = float("inf")
+#         print(f"factors = {factors}")
+#         print(f"factorials = {factorials}")
+#         factors = [int(n) for n in factors]
+#         print(f"combination = {int(reduce((lambda a,b: a * b), factors))}")
+#         combinations += int(reduce((lambda a,b: a * b), factors))
+#     print(f"combinations: {combinations}")
+#     return combinations
+
+# _print = True
+# print(sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:])[0]) + 1)
+
+
+
+
 
 
 # def combs(word, i):
 #     print(f"combs: {sum( map(  lambda comb: f(len(word) - i - 1) / comb,  non_unique_combs(word[i:]) )  )}")
 #     return sum( map(  lambda comb: f(len(word) - i - 1) / comb,  non_unique_combs(word[i:]) )  )
-
-
-_print = True
-print(sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:])[0]) + 1)
 
 # RESULT WITH AVOIDING DIVIDING LARGE NUMBERS
 # combinations: 628347629070120960000
@@ -143,6 +140,44 @@ print(sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:
 # combs: 12
 # 718393983731145714557
 
+# question
+# [einoqstu]
+# pos = 4*f(7) + 6*f(6) + 0*f(5) + 3*f(4) + 3*f(3) + 0*f(2) + 1*f(1) + 1
+# print(pos)
+
+# 4! / 4 + 4! / 2
+# 3 * 4! / 4
+# BEKKOO
+# BEKOKO
+# BEKOOK
+# BEOKKO
+# BEOKOK
+# BEOOKK
+# BKEKOO
+# BKEOKO
+# BKEOOK
+# BKKEOO
+# BKKOEO
+# BKKOOE
+# BKOEKO
+# BKOEOK
+# BKOKEO
+# BKOKOE
+# BKOOEK
+# BKOOKE
+# BOEKKO
+# BOEKOK
+# BOEOKK
+# BOKEKO
+# BOKEOK
+# BOKKEO
+# BOKKOE
+# BOKOEK
+# BOKOKE
+# BOOEKK
+# BOOKEK
+# BOOKKE
+
 
 # SECOND VERSION FOR CODEWARS
 
@@ -161,7 +196,6 @@ print(sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:
 #     return sum( map(  lambda comb: f(len(word) - i - 1) / comb,  non_unique_combs(word[i:]) )  )
  
 # return sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:])[0]) + 1
-
 
 
 
@@ -213,6 +247,9 @@ print(sum(combs(word,i) for i in range(len(word)-1) if word[i] != unique(word[i:
 # >>> 89763947010017280000 * 3
 # 269291841030051840000
 
+
+
+# FINDING A WAY TO AVOID DIVIDING LARGE NUMBERS
 # factorials = [2, 2, 2, 6, 2, 6, 2, 2]
 # factors = list(range(1,25))
 # for i in range(len(factors)):
