@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/55983863da40caa2c900004e
+
 def next_bigger(n):
     n_digits = [int(n) for n in str(n)]
     i = len(n_digits) - 2
