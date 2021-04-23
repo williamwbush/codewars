@@ -12,4 +12,4 @@ def thirt(n):
         sum1 = sum2
         n = sum2
 
-print(thirt(1234567))
+print(thirt(123456778990))
